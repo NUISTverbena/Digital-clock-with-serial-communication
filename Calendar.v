@@ -3,8 +3,8 @@ module claendar (clk,Less,Middle,Big,Day,Month,Year,sign_in,reset,set,Less_uart,
 input clk,Less,Middle,Big,sign_in,reset,set,uart_sign;
 input [6:0]Less_uart,Middle_uart,Big_uart;
 output reg [6:0]Year = 5'd24;
-output reg [6:0]Day = 5'd2;
-output reg [6:0]Month = 5'd2;
+output reg [6:0]Day = 5'd3;
+output reg [6:0]Month = 5'd3;
 integer x=0;
 wire sign2;
 reg flag = 1'b0;
@@ -55,8 +55,8 @@ begin
 if (!reset)
 begin
 Year = 7'd24;
-Day = 7'd2;
-Month = 7'd2;
+Day = 7'd3;
+Month = 7'd3;
 end
 
 else if (set == 1 && uart_sign == 0)

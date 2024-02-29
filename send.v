@@ -16,7 +16,7 @@ output  uart
 //input [6:0]Month,
 //inout [6:0]Year,都是两位数 由两位数转一位数后 进行8421BCD => ASCII
 
-reg [159:0]remember = 160'b0010011001_0000011001_0010011001_0001011001_0101101001_0000011001_0010011001_0101101001_0100011001_0101011001_0000001001_0010011001_0100011001_0010111001_0001011001_0101011001;
+reg [169:0]remember = 170'b_0010011001_0000011001_0010011001_0001011001_0101101001_0000011001_0010011001_0101101001_0100011001_0101011001_0000001001_0010011001_0100011001_0010111001_0001011001_0101011001_0101100001;
 integer x;
 reg clk_2;
 reg uart_wire;
@@ -35,16 +35,16 @@ Month_high = Month/10;
 Year_low = Year%10;
 Year_high = Year/10;
 
-remember[138:135] <= {Year_high[0],Year_high[1],Year_high[2],Year_high[3]};
-remember[128:125] <= {Year_low[0],Year_low[1],Year_low[2],Year_low[3]};
-remember[108:105] <= {Month_high[0],Month_high[1],Month_high[2],Month_high[3]};
-remember[98:95] <= {Month_low[0],Month_low[1],Month_low[2],Month_low[3]};
-remember[78:75] <= {Day_high[0],Day_high[1],Day_high[2],Day_high[3]};
-remember[68:65] <= {Day_low[0],Day_low[1],Day_low[2],Day_low[3]};
-remember[48:45] <= {Hour_high[0],Hour_high[1],Hour_high[2],Hour_high[3]};
-remember[38:35] <= {Hour_low[0],Hour_low[1],Hour_low[2],Hour_low[3]};
-remember[18:15] <= {Min_high[0],Min_high[1],Min_high[2],Min_high[3]};
-remember[8:5] <= {Min_low[0],Min_low[1],Min_low[2],Min_low[3]};
+remember[148:145] <= {Year_high[0],Year_high[1],Year_high[2],Year_high[3]};
+remember[138:135] <= {Year_low[0],Year_low[1],Year_low[2],Year_low[3]};
+remember[118:115] <= {Month_high[0],Month_high[1],Month_high[2],Month_high[3]};
+remember[108:105] <= {Month_low[0],Month_low[1],Month_low[2],Month_low[3]};
+remember[88:85] <= {Day_high[0],Day_high[1],Day_high[2],Day_high[3]};
+remember[78:75] <= {Day_low[0],Day_low[1],Day_low[2],Day_low[3]};
+remember[58:55] <= {Hour_high[0],Hour_high[1],Hour_high[2],Hour_high[3]};
+remember[48:45] <= {Hour_low[0],Hour_low[1],Hour_low[2],Hour_low[3]};
+remember[28:25] <= {Min_high[0],Min_high[1],Min_high[2],Min_high[3]};
+remember[18:15] <= {Min_low[0],Min_low[1],Min_low[2],Min_low[3]};
 
 end
 
@@ -63,7 +63,7 @@ x <= x + 1;
 end
 end
 
-integer y = 319;
+integer y = 339;
 reg flag = 0; //只要输出一次
 
 always@(posedge clk_2)
@@ -73,7 +73,7 @@ if (Sec == 0) flag <= 0;
 
 else if (y <= 0)
 begin
-y <= 319;
+y <= 339;
 flag <= 1;
 end
 
@@ -83,13 +83,13 @@ y <= y - 1;
 end
 
 if (Sec == 0) uart_wire <= 1'b1;
-else if(flag == 0 && y>159) uart_wire <= remember[y - 160];
-else if (flag == 0 && y<=159) uart_wire <= remember[y];
+else if(flag == 0 && y>169) uart_wire <= remember[y - 170];
+else if (flag == 0 && y<=169) uart_wire <= remember[y];
 
 
 end
 
-assign uart =(y<=159)? uart_wire : 1'b1;
+assign uart =(y<=169)? uart_wire : 1'b1;
 
 endmodule 
 

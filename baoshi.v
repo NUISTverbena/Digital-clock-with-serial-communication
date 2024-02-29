@@ -1,6 +1,6 @@
-module baoshi (clk,S_in,M_in,buzz);
+module baoshi (clk,S_in,M_in,buzz,set_time);
 
-input [6:0] S_in,M_in;
+input [6:0] S_in,M_in,set_time;
 input clk;
 output reg buzz;
 integer count1,count2;
@@ -29,11 +29,14 @@ always@ (posedge clk)
 
 always@ (posedge clk)
 	begin
+	if(set_time == 0)
+	begin
 		if(S_in == 50 && M_in ==59) buzz <= clk_2;
 		else if(S_in == 52 && M_in ==59) buzz <= clk_2;
 		else if(S_in == 54 && M_in ==59) buzz <= clk_2;
 		else if(S_in == 56 && M_in ==59) buzz <= clk_2;
 		else if(S_in == 58 && M_in ==59) buzz <= clk_2;
 		else if(S_in == 0 && M_in ==0) buzz <= clk_1;
+	end
 	end
 endmodule 
