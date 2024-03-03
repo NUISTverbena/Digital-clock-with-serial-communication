@@ -20,7 +20,7 @@ wire [6:0]Less_clock_uart, Middle_clock_uart,Big_clock_uart,Less_cla_uart,Middle
 
 clock U1 (clk,set_time,reset,pressa,pressb,pressc,Sec,Min,Hour,sign_out,Less_clock_uart,Middle_clock_uart,Big_clock_uart,uart_sign);
 
-display U2 (clk,Less_out,Middle_out,Big_out,DIG,Digitron_Out);
+display U2 (clk,Less_out,Middle_out,Big_out,DIG,Digitron_Out,stop,out);
 
 keyunit U3 (clk,reset,Less_in,pressa);
 

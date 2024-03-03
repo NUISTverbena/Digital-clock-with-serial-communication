@@ -1,5 +1,7 @@
-module display (clk,L,M,B,DIG,Digitron_Out);
+module display (clk,L,M,B,DIG,Digitron_Out,stop,in);
 
+input stop;
+input[2:0]in;
 input clk;
 input [6:0]L;
 input [6:0]M;
@@ -29,7 +31,7 @@ end
 
 always@ (posedge clk)
 begin
-if (L != 60)
+if (L != 60 && !(stop ==0 && in == 3'b010))
 begin
 if (DIG[0]==0)
 begin
@@ -150,7 +152,7 @@ end
 end
 
 
-else if (L == 60) //闹钟阶段的清零
+else if (L == 60|| (stop ==0 && in == 3'b010)) //闹钟阶段的清零
 begin
 Digitron_Out <= 8'b01000000;
 end

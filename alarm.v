@@ -3,7 +3,7 @@ module alarm (clk,set,reset,Sec,Min,Hour,Less_in,Big_in,Middle_in,stop,Sec_in,Mi
 input [6:0]Sec_in,Min_in,Hour_in,uart_sign;
 input set,reset,Less_in,Big_in,Middle_in,clk,stop;
 input [6:0] Less_uart,Middle_uart,Big_uart;
-output reg [6:0]Sec = 6'd60;
+output reg [6:0]Sec = 6'd30;
 output reg [6:0]Min = 6'd59;
 output reg [6:0]Hour = 6'd23;
 reg flag = 1'b1;
@@ -14,7 +14,7 @@ begin
 
 if(!reset)
 begin
-Sec <= 6'd60;
+Sec <= 6'd00;
 Min <= 6'd59;
 Hour <= 6'd23;
 end
